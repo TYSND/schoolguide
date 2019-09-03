@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改边</title>
+
+		<link href="css/indexlayout.css" rel="stylesheet" type="text/css" />
+		<script src="js/public-header.js"></script>
+
+	</head>
+	<style>
+	.blackbut{
+		text-align:center;
+		font-size:16px;
+		color:white;
+		font-family:"微软雅黑","黑体";
+		font-weight:bold;
+		display:flex;
+		align-items:center;
+		margin-left:5px;
+		margin-right:5px;
+		border-radius:6px;
+		width:60px;
+		height:28px;
+		background:RGB(0,0,51);
+		border:none;
+		padding-left:15px;
+		padding-right:15px;
+	}
+	</style>
+<body>
+
+<div class="topblacktitle">
+	修改边
+</div>
+<form method="post" action="php/updateEdge.php" enctype="multipart/form-data" onsubmit="">
+<?php
+	$fname=$_GET['fromname'];
+	$tname=$_GET['toname'];
+?>
+        <div class="bar">
+			<div style="float:left;">
+				<div >起点
+				</div>
+				<input type="text" id="fromName" name="fromname" value="<?php echo $fname;?>"/>
+			</div>
+			<div style="float:left;margin-left:20px;">
+				<div >终点
+				</div>
+				<input type="text" id="probName" name="toname"  value="<?php echo $tname;?>"/>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="bar">
+				<div class="grid">
+					<div class="titlefont">距离
+					</div>
+					<input type="text" id="Dist" name="dist" />
+				</div>
+				<div class="grid">
+					<div class="titlefont">容量
+					</div>
+					<input type="text" id="Cap" name="cap" />
+				</div>
+			<div style="clear:both"></div>			
+		</div>
+
+        
+    	<div class="bar flexcenter">
+        	<div class="titlefont" style="float:left">是否删除该边</div>
+	        <input style="float:left;margin-left:20px;" type="checkbox" name="isdel"></input>
+        </div>
+		<div class="bar">
+				<div class="submitButton">
+					<input  type="submit" class="blackbut" id="submitbutton" value="提交" onmousedown="document.getElementById('submitbutton').style='width:50px;height:20px;';" 
+					onmouseup="document.getElementById('submitbutton').style='width:60px;height:28px;';" >
+				</div>
+		</div>
+		
+</form>
+</body>
+
+</html>
