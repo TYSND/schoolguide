@@ -1,6 +1,6 @@
 <?php
 		
-		require "dblogin.php";
+		require "php/dblogin.php";
 		$result=mysqli_query($con,"select * from vertexinfo where ishide=0");
 		
 		while ($row=mysqli_fetch_array($result))
