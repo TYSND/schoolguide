@@ -32,6 +32,9 @@
 		if	(!mysqli_query($con,"insert into edgeinfo values ({$vid},{$tovid},{$dist},{$cap})")){
 			die(mysqli_error($con));
 		}
+		if	(!mysqli_query($con,"insert into edgeinfo values ({$tovid},{$vid},{$dist},{$cap})")){
+			die(mysqli_error($con));
+		}
 	}
 	
 ?>
