@@ -3,11 +3,11 @@ $spf=$_POST['shortpathfrom'];
 $spt=$_POST['shortpathto'];
 $mff=$_POST['maxflowfrom'];
 $mft=$_POST['maxflowto'];
-require 'php/dblogin.php';
+require 'dblogin.php';
 if($spf!=""&&$spt!="")
 {
-	echo "<script>document.getElementById('func1beg').value='{$spf}'</script>";
-	echo "<script>document.getElementById('func1end').value='{$spt+}'</script>";
+	//echo "<script>document.getElementById('func1beg').value='{$spf}'</script>";
+	//echo "<script>document.getElementById('func1end').value='{$spt}'</script>";
 	
 	$fidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$spf}'");
 	$fidrow=mysqli_fetch_array($fidres);
@@ -21,15 +21,13 @@ if($spf!=""&&$spt!="")
 	//print_r($result);
 	$filename ="result.out";
 	$handle  = fopen ($filename, "r");
-	$splen=fgets($handle);
-	echo "<script>document.getElementById('func1out').value='{$splen}'</script>";
-	echo '<script>
-			var spverset=new Array();';
+	$res="";	
 	while (!feof ($handle)) 
 	{
-		echo 'spverset.push('.fgets($handle).')';
+		$res=$res.fgets($handle)."-";	
 	}
-	echo '</script>';
+	substr($res, 0, -1);
+	echo $res;
 	fclose ($handle);
 	/*
 	func1beg
@@ -53,7 +51,7 @@ else if($mff!=""&&$mft!="")
 	$handle  = fopen ($filename, "r");
 	while (!feof ($handle)) 
 	{
-		echo fgets($handle)."<br/>";
+		echo fgets($handle);
 	}
 	fclose ($handle);
 }
