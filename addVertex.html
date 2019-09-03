@@ -35,6 +35,8 @@
 		newPosX=(e.clientX - rect.left) - leftB;  
 	    newPosY=(e.clientY - rect.top) - topB;
 		document.getElementById("newPos").style="left:"+newPosX+"px;top:"+newPosY+"px;";
+		document.getElementById("showPosX").innerHTML=newPosX;
+		document.getElementById("showPosY").innerHTML=newPosY;		
 	}
 	/*
 	function getCanvasPos(e)  
@@ -108,6 +110,15 @@
 	<form action="php/addVertex.php" method="post">
         <div style="float:left;width:20%;">
             <div class="bar" >
+            	<div class="titleFont">坐标
+                </div>
+                <div class="titleFont" id="showPosX" style="float:left">0
+                </div>
+                <div class="titleFont"style="float:left">,
+                </div>
+                <div class="titleFont" id="showPosY" style="float:left">0
+                </div>
+                <div style="clear:both"></div>
                 <div class="titleFont">地名
                 </div>
                 <input type="text" name="vertexname"/>
