@@ -4,10 +4,12 @@ $spt=$_POST['shortpathto'];
 $mff=$_POST['maxflowfrom'];
 $mft=$_POST['maxflowto'];
 require 'dblogin.php';
+//echo 'get spf:'.$spf.'  get spt:'.$spt;
 if($spf!=""&&$spt!="")
 {
 	//echo "<script>document.getElementById('func1beg').value='{$spf}'</script>";
 	//echo "<script>document.getElementById('func1end').value='{$spt}'</script>";
+	//echo 'get spf:'.$spf.'  get spt:'.$spt;
 	
 	$fidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$spf}'");
 	$fidrow=mysqli_fetch_array($fidres);
@@ -26,7 +28,8 @@ if($spf!=""&&$spt!="")
 	{
 		$res=$res.fgets($handle)."-";	
 	}
-	substr($res, 0, -1);
+	$res=substr($res, 0, -1);
+	$res=substr($res, 0, -1);
 	echo $res;
 	fclose ($handle);
 	/*

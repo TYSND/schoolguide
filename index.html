@@ -3,33 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>school guide</title>
+<script src="js/drawMap.js"></script>
 <script>
 	var posName=[];
 	var posDis=[];
 	var posX=[],posY=[];
 	var edges=[];
-	<?php
-		
-		require "php/dblogin.php";
-		$result=mysqli_query($con,"select * from vertexinfo where ishide=0");
-		
-		while ($row=mysqli_fetch_array($result))
-		{
-			echo 'posName["'.$row['vertexid'].'"]="'.$row['name'].'";';
-			echo 'posDis["'.$row['vertexid'].'"]="'.$row['descript'].'";';
-			echo 'posX["'.$row['vertexid'].'"]="'.$row['x'].'";';
-			echo 'posY["'.$row['vertexid'].'"]="'.$row['y'].'";';
-		}
-		
-		$result=mysqli_query($con,"select fromv,tov from edgeinfo where fromv not in 
-			(select vertexid from vertexinfo where ishide=1) and tov not in (select vertexid from vertexinfo where ishide=1)");
-		
-		while ($row=mysqli_fetch_array($result))
-		{
-			echo $row['fromv'].$row['tov']."\n";
-			echo 'edges["'.$row['fromv'].'"]="'.$row['tov'].'";';
-		}
-	?>
+	
+	<?php require "php/setPositionInfoArray.php";?>
 	
 	var selectPos=-1;
 	function changeShowPos(ind){
@@ -51,33 +32,45 @@
 	function func1(){
 		var fromv=document.getElementById("shortpathfrom").value,
 			tov=document.getElementById("shortpathto").value;
-		var str="?shortpathfrom="+fromv+"&shortpathto="+tov;
-		
-		alert(str);
-		
-		var res=getXMLHttpRequest("POST","php/shortPath&Maxflow.php",str);
-		
-		alert(res);
-		
-		var resArray=res.split("-");
-		document.getElementById("shortpathans").innerHTML=resArray[0];
-		
-		//重画红色路径
-		var ctx=getCanvasHandle();
-		ctx.fillStyle='rgba(255,102,89,1.0)';
-		ctx.lineWidth=7;
-		ctx.lineJoin="round";
-		for (var i=1;i<resArray.length-1;i++)
-		{
-			var fromv=resArray[i],tov=resArray[i+1];
-			ctx.moveTo(posX[fromv],posY[fromv]);
-			ctx.lineTo(posX[tov],posY[tov]);
-			ctx.stroke();
-		}
+		var str="shortpathfrom="+fromv+"&shortpathto="+tov;
+		var xmlHttp=getXMLHttpRequest("POST","php/shortPath&Maxflow.php");
+		xmlHttp.send(str);
+		xmlHttp.onreadystatechange=function(){
+			if (xmlHttp.readyState==4)
+			// 4 = "loaded"
+				if (xmlHttp.status==200)
+				{// 200 = OK
+					alert("ok!"+xmlHttp.responseText);
+					var res=xmlHttp.responseText;
+					var resArray=res.split("-");
+					document.getElementById("shortpathans").innerHTML=resArray[0];
+					
+					//重画红色路径
+					
+					for (var i=1;i<resArray.length-1;i++)
+					{
+						var ctx=getCanvasHandle();
+						var tmpfromv=resArray[i],tmptov=resArray[i+1];
+						alert("draw |"+tmpfromv+"| and |"+tmptov+"|");
+						alert("draw "+posX[tmpfromv]+" and "+posY[tmpfromv]);
+						ctx.beginPath();
+						
+						ctx.moveTo(posX[tmpfromv],posY[tmpfromv]);
+						ctx.lineTo(posX[tmptov],posY[tmptov]);
+
+						ctx.strokeStyle='rgba(255,102,89,0.2)';
+						ctx.lineWidth="7";
+//						ctx.fillStyle='rgba(255,102,89,1.0)';
+						ctx.lineJoin="round";
+						ctx.stroke();
+					}
+				}
+				else	alert("??????");
+		 };	 
 	}
 	
-	//开启xmlhttprequest并返回结果
-	function getXMLHttpRequest(method,action,data)
+	//开启并返回一个xmlhttprequest对象（未发送数据）
+	function getXMLHttpRequest(method,action)
 	{
 		var xmlHttp=null;
 		if (window.XMLHttpRequest)
@@ -90,28 +83,16 @@
 		}
 		if (xmlHttp!=null)
 		{
-			xmlHttp.open(method,action, false);
-			xmlHttp.send(data);
-			/*
-			xmlHttp.onreadystatechange=function(){
-				if (xmlHttp.readyState==4)
-				// 4 = "loaded"
-					if (xmlHttp.status==200)
-					{// 200 = OK
-						alert("ok!"+xmlHttp.responseText);
-						return xmlHttp.responseText;
-					}
-					else	return "??????";
-			 };
-			 */
-			xmlDoc=xmlHttp.responseText;	
-			return xmlDoc;
+			xmlHttp.open(method,action, true);
+			xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			return xmlHttp;
 		}
 	}
 	
 	function getCanvasHandle(){
 		var c=document.getElementById("canvas");
         var ctx=c.getContext("2d");
+	//	ctx.beginPath();
 		return ctx;
 	}
 </script>
@@ -139,18 +120,8 @@
 		</script>
         
         <canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left">
-            <script>
-            //画路线
-                var c=document.getElementById("canvas");
-                var ctx=c.getContext("2d");
-				for (var fromv in edges)
-				{
-					var tov=edges[fromv];
-					ctx.moveTo(posX[fromv],posY[fromv]);
-					ctx.lineTo(posX[tov],posY[tov]);
-					ctx.stroke();
-				}
-            </script>
+            
+		<script>drawMap();</script>
         </canvas>
     </div>
     <div style="float:left" style="width:20%">
