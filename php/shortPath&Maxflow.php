@@ -55,10 +55,7 @@ else if($mff!=""&&$mft!="")
 	}
 	fclose ($handle);
 }
-else
-{
-	echo '<script>alert("起点和终点都要输入！");</script>';
-}
+
 /*
 $command = './schoolguide 0 1 2';
 passthru($command);
