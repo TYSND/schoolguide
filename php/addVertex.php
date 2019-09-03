@@ -10,6 +10,7 @@
 		select max(vertexid) as vid from vertexinfo
 	;");
 	$vidrow=mysqli_fetch_array($vidres);
+	if($vid=="")	$vid=0;
 	$vid=$vidrow['vid']+1;
 	//插入点信息
 	$insertvres=mysqli_query($con,"
