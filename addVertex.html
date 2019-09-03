@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>addVertex</title>
+<script>
+	var newPosX=0,newPosY=0;
+	function addEdge(){
+//		alert("dsd");
+		var tovid=document.getElementById("tovid").value;
+		var dist=document.getElementById("dist").value;
+		var cap=document.getElementById("cap").value;
+		var str=tovid+"-"
+				+dist+"-"
+				+cap;
+		document.getElementById("edgesField").innerHTML+=(
+		"<div style=\"float:left\>"+
+			"<div style=\"float:left\">从新结点到"+tovid+"号结点 距离"+dist+" 人流量"+cap+"</div>"+
+			"<input style=\"display:none\" value=\""+str+"\"name=\"edges[]\" />"+
+			"<img style=\"float:left;\" src=\"image/cancel.png\" onclick=\"clickDelete(event)\"/>"+
+		"</div>");
+	}
+	//点击删除添加的边
+	function clickDelete(event){
+		var pp=event.target.parentNode.parentNode;
+		pp.removeChild(event.target.parentNode);
+	}
+	//点击画布更改新加的点的位置
+	function changeNewPos(e){
+		var canvas=document.getElementById("canvas");
+		var rect = canvas.getBoundingClientRect(); 
+	    var leftB = parseInt(canvas.style.borderLeftWidth);//获取的是样式，需要转换为数值
+	    var topB = parseInt(canvas.style.borderTopWidth);
+		newPosX=(e.clientX - rect.left) - leftB;  
+	    newPosY=(e.clientY - rect.top) - topB;
+		document.getElementById("newPos").style="left:"+newPosX+"px;top:"+newPosY+"px;";
+	}
+	/*
+	function getCanvasPos(e)  
+	{
+		//获取鼠标在canvas上的坐标
+
+	    var rect = canvas.getBoundingClientRect(); 
+	    var leftB = parseInt(getStyles(canvas).borderLeftWidth);//获取的是样式，需要转换为数值
+	    var topB = parseInt(getStyles(canvas).borderTopWidth);
+	    return {   
+	     x: (e.clientX - rect.left) - leftB,  
+	     y: (e.clientY - rect.top) - topB 
+	   };  
+	}
+	*/
+</script>
+
+<link href="css/mapLayout.css" rel="stylesheet" type="text/css" />
+<style>
+	.newPosition{
+		width:20px;
+		height:20px;
+		border-radius:20px;
+		border:solid 2px white;
+		background-color:#BA4118;
+		position:absolute;
+		box-shadow:0 0 2px black;
+	}
+</style>
+
+</head>
+
+<body>
+	<div style="float:left;width:70%">
+        <!--点的坐标比线端点坐标要减去圆的半径-->
+        <div class="newPosition" id="newPos" style="left:0;top:0;">
+        </div>
+        <div class="position flexCenter infoFont" style="top:50px;left:150px;" onclick="changeShowPos('0')">
+			<img src="image/position.png" style="float:left"/>
+            <div style="float:left">
+            图书馆
+            </div>
+        </div>
+        <div class="position flexCenter infoFont" style="left:200px;top:350px;" onclick="changeShowPos('1')">
+            宿舍
+        </div>
+        <div class="position" style="left:200px;top:450px;" onclick="changeShowPos('2')">
+            食堂
+        </div>
+        <div class="position" style="left:450px;top:50px;" onclick="changeShowPos('3')">
+            教学楼
+        </div>      
+        <div class="position" style="left:500px;top:550px;" onclick="changeShowPos('4')">
+            操场
+        </div>
+        <canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)">
+            <script>
+            //画路线
+                var c=document.getElementById("canvas");
+                var ctx=c.getContext("2d");
+                ctx.moveTo(200,100);
+                ctx.lineTo(250,400);
+                ctx.lineTo(250,500);
+                ctx.stroke();
+                ctx.moveTo(500,100);
+                ctx.lineTo(550,600);
+                ctx.stroke();
+            </script>
+        </canvas>
+    </div>
+	<form action="php/addVertex.php" method="post">
+        <div style="float:left;width:20%;">
+            <div class="bar" >
+                <div class="titleFont">地名
+                </div>
+                <input type="text" name="vertexname"/>
+                <div class="titleFont">介绍
+                </div>
+                <textarea name="vertexdescript"></textarea>
+                <div id="edgesField">
+                    <div>从新结点到</div>
+                    <input  id="tovid"/>
+                    <div>距离</div>
+                    <input  id="dist"/>            
+                    <div>人流量</div>	
+                    <input  id="cap"/>
+                    <input id="compressedEdgeInfo" name="edges[]" style="display:none" />         
+                </div>
+                <div onclick="addEdge()">增加边</div>
+                <input type="submit"/>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

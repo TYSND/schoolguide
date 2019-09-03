@@ -5,18 +5,42 @@
 <title>school guide</title>
 <style>
 	.position{
-		width:100px;height:100px;
-		border-radius:50px;
-		border:solid black 1px;
-		background-color:#5FBDD1;
+		padding:6px 10px 6px 10px;
+
+		border-radius:20px;
+		border:inset black 2px;
+		background-color:white;
+		box-shadow:3px 3px 5px #8D8D8D;
 		
 		position:absolute;
 		text-align:center;
 		font:24px;
 	}
+	.bar{
+		background:white;
+		margin-bottom:10px;
+		padding-top:10px;
+		padding-left:10%;
+		padding-bottom:10px;
+		border-radius:5px;
+		box-shadow:0px 0px 5px #8D8D8D;
+		height:auto;
+	}
+	.flexCenter{
+		display:flex;
+		align-items:center;		
+	}
 	button{
 		min-width:100px;height:50px;font-size:24px;
 		clear:both;
+	}
+	.titleFont{
+		font-size:24px;
+		font-family:微软雅黑, 黑体, Consolas;
+	}
+	.infoFont{
+		font-size:16px;
+		font-family:微软雅黑, 黑体, Consolas;
 	}
 </style>
 <script>
@@ -44,10 +68,13 @@
 <body>
 	<div style="float:left;width:70%">
         <!--点的坐标比线端点坐标要减去圆的半径-->
-        <div class="position" style="top:50px;left:150px;" onclick="changeShowPos('0')">
+        <div class="position flexCenter infoFont" style="top:50px;left:150px;" onclick="changeShowPos('0')">
+			<img src="image/position.png" style="float:left"/>
+            <div style="float:left">
             图书馆
+            </div>
         </div>
-        <div class="position" style="left:200px;top:350px;" onclick="changeShowPos('1')">
+        <div class="position flexCenter infoFont" style="left:200px;top:350px;" onclick="changeShowPos('1')">
             宿舍
         </div>
         <div class="position" style="left:200px;top:450px;" onclick="changeShowPos('2')">
@@ -75,15 +102,19 @@
         </canvas>
     </div>
     <div style="float:left" style="width:20%">
-        <div style="">
-            <div id="showPosName" style="height:100px;width:100%">
+        <div class="bar">
+        	<div class="titleFont">地名
             </div>
-            <div id="showPosDis" style="height:200px;width:100%">
+            <div id="showPosName" class="infoFont" style="height:100px;width:100%">
+            </div>
+            <div class="titleFont">信息
+            </div>
+            <div id="showPosDis" class="infoFont" style="height:200px;width:100%">
             </div>        
         </div>
-        <div style="">
-    <div style="clear:both">
-        	<button value="增加点">增加点
+        <div class="bar">
+    		<div style="clear:both"></div>
+        	<button value="增加点" onclick="window.location.href='addVertex.html'">增加点
             </button>
             <button id="deleteBut" disabled="disabled" value="删除点">删除点
             </button>
@@ -91,7 +122,7 @@
             </button>
         </div>
     </div>
-    <div style="clear:both">
+    <div style="clear:both"></div>
     
     
 </body>
