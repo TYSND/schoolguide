@@ -36,7 +36,9 @@
 	    newPosY=(e.clientY - rect.top) - topB;
 		document.getElementById("newPos").style="left:"+newPosX+"px;top:"+newPosY+"px;";
 		document.getElementById("showPosX").innerHTML=newPosX;
-		document.getElementById("showPosY").innerHTML=newPosY;		
+		document.getElementById("showPosY").innerHTML=newPosY;
+		document.getElementById("x").value=newPosX;
+		document.getElementById("y").value=newPosY;
 	}
 	/*
 	function getCanvasPos(e)  
@@ -124,15 +126,19 @@
                 <input type="text" name="vertexname"/>
                 <div class="titleFont">介绍
                 </div>
+                
                 <textarea name="vertexdescript"></textarea>
+                <input style="display:none" name="x" id="x"/>
+                <input style="display:none" name="y" id="y"/>
                 <div id="edgesField">
+                
                     <div>从新结点到</div>
                     <input  id="tovid"/>
                     <div>距离</div>
                     <input  id="dist"/>            
                     <div>人流量</div>	
                     <input  id="cap"/>
-                    <input id="compressedEdgeInfo" name="edges[]" style="display:none" />         
+                            
                 </div>
                 <div onclick="addEdge()">增加边</div>
                 <input type="submit"/>

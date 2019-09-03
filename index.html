@@ -3,49 +3,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>school guide</title>
-<style>
-	.position{
-		padding:6px 10px 6px 10px;
-
-		border-radius:20px;
-		border:inset black 2px;
-		background-color:white;
-		box-shadow:3px 3px 5px #8D8D8D;
-		
-		position:absolute;
-		text-align:center;
-		font:24px;
-	}
-	.bar{
-		background:white;
-		margin-bottom:10px;
-		padding-top:10px;
-		padding-left:10%;
-		padding-bottom:10px;
-		border-radius:5px;
-		box-shadow:0px 0px 5px #8D8D8D;
-		height:auto;
-	}
-	.flexCenter{
-		display:flex;
-		align-items:center;		
-	}
-	button{
-		min-width:100px;height:50px;font-size:24px;
-		clear:both;
-	}
-	.titleFont{
-		font-size:24px;
-		font-family:微软雅黑, 黑体, Consolas;
-	}
-	.infoFont{
-		font-size:16px;
-		font-family:微软雅黑, 黑体, Consolas;
-	}
-</style>
 <script>
-	var posName=["图书馆","宿舍","食堂","教学楼","操场"];
-	var posDis=["shi tu shu guan","shi su she","shi shi tang","shi jiao xue lou","shi cao chang"];
+	var posName=[];
+	var posDis=[];
+	var posX=[],posY=[];
+	//
+	var edges=[];
+	<?php
+		
+		require "php/dblogin.php";
+		$result=mysqli_query($con,"select * from vertexinfo where ishide=0");
+		
+		while ($row=mysqli_fetch_array($result))
+		{
+			echo 'posName["'.$row['vertexid'].'"]="'.$row['name'].'";';
+			echo 'posDis["'.$row['vertexid'].'"]="'.$row['discript'].'";';
+			echo 'posX["'.$row['vertexid'].'"]="'.$row['x'].'";';
+			echo 'posY["'.$row['vertexid'].'"]="'.$row['y'].'";';
+		}
+		
+		$result=mysqli_query($con,"select fromv,tov from edgeinfo where fromv not in 
+			(select vertexid from vertexinfo where ishide=1) and tov not in (select vertexid from vertexinfo where ishide=1)");
+		
+		while ($row=mysqli_fetch_array($result))
+		{
+			echo $row['fromv'].$row['tov']."\n";
+			echo 'edges["'.$row['fromv'].'"]="'.$row['tov'].'";';
+		}
+	?>
+	
 	var selectPos=-1;
 	function changeShowPos(ind){
 		var nameBar=document.getElementById("showPosName");
@@ -63,41 +49,41 @@
 		document.getElementById("changeBut").disabled=false;		
 	}
 </script>
+<link href="css/mapLayout.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 	<div style="float:left;width:70%">
         <!--点的坐标比线端点坐标要减去圆的半径-->
-        <div class="position flexCenter infoFont" style="top:50px;left:150px;" onclick="changeShowPos('0')">
-			<img src="image/position.png" style="float:left"/>
-            <div style="float:left">
-            图书馆
-            </div>
-        </div>
-        <div class="position flexCenter infoFont" style="left:200px;top:350px;" onclick="changeShowPos('1')">
-            宿舍
-        </div>
-        <div class="position" style="left:200px;top:450px;" onclick="changeShowPos('2')">
-            食堂
-        </div>
-        <div class="position" style="left:450px;top:50px;" onclick="changeShowPos('3')">
-            教学楼
-        </div>      
-        <div class="position" style="left:500px;top:550px;" onclick="changeShowPos('4')">
-            操场
-        </div>
+		<div id="posField">
+		</div>
+		<script>
+		//画出所有地点
+			var posField=document.getElementById("posField");
+			for (var index in posName)
+			{
+				var str="<div class=\"position flexCenter infoFont\" style=\"top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
+				"onclick=\"changeShowPos(\'"+index+"\')\"><img src=\"image/location-sign.png\" style=\"float:left\"/>"+
+				"<div style=\"float:left\">"+
+				posName[index]+
+				"</div>"+
+				"</div>";
+				posField.innerHTML+=str;
+			}
+		</script>
+        
         <canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left">
             <script>
             //画路线
                 var c=document.getElementById("canvas");
                 var ctx=c.getContext("2d");
-                ctx.moveTo(200,100);
-                ctx.lineTo(250,400);
-                ctx.lineTo(250,500);
-                ctx.stroke();
-                ctx.moveTo(500,100);
-                ctx.lineTo(550,600);
-                ctx.stroke();
+				for (var fromv in edges)
+				{
+					var tov=edges[fromv];
+					ctx.moveTo(posX[fromv],posY[fromv]);
+					ctx.lineTo(posX[tov],posY[tov]);
+					ctx.stroke();
+				}
             </script>
         </canvas>
     </div>
