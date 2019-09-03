@@ -16,8 +16,8 @@
 		
 		while ($row=mysqli_fetch_array($result))
 		{
-			echo $row['fromv'].$row['tov']."\n";
-			echo 'edges.push(['.$row['fromv'].','.$row['tov'].'])';
+			//echo $row['fromv'].$row['tov']."\n";
+			echo 'edges.push(['.$row['fromv'].','.$row['tov'].']);';
 			//echo 'edges["'.$row['fromv'].'"]="'.$row['tov'].'";';
 		}
 ?>
