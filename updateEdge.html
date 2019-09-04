@@ -37,6 +37,23 @@
 <?php
 	$fname=$_GET['fromname'];
 	$tname=$_GET['toname'];
+	require 'php/dblogin.php';
+	//$sql="select vertexid from vertexinfo where name='{$fname}';";
+	//echo $sql;
+	$fidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$fname}';");
+	$fidrow=mysqli_fetch_array($fidres);
+	$fid=$fidrow['vertexid'];
+//	echo $fid;
+	$tidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$tname}';");
+	$tidrow=mysqli_fetch_array($tidres);
+	$tid=$tidrow['vertexid'];
+	
+	$result=mysqli_query($con,"select dist,cap from edgeinfo where fromv={$fid} and tov={$tid}");
+	$row=mysqli_fetch_array($result);
+	$dist=$row['dist'];
+	$cap=$row['cap'];
+	//echo 'hehehehehehehehehhehehehehehehehe';
+	//echo $dist." ".$cap;
 ?>
         <div class="bar">
 			<div style="float:left;">
@@ -56,12 +73,12 @@
 				<div class="grid">
 					<div class="titlefont">距离
 					</div>
-					<input type="text" id="Dist" name="dist" />
+					<input type="text" id="Dist" name="dist" value="<?php echo $dist;?>" />
 				</div>
 				<div class="grid">
 					<div class="titlefont">容量
 					</div>
-					<input type="text" id="Cap" name="cap" />
+					<input type="text" id="Cap" name="cap" value="<?php echo $cap;?>" />
 				</div>
 			<div style="clear:both"></div>			
 		</div>
