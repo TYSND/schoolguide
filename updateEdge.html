@@ -40,18 +40,27 @@
 	require 'php/dblogin.php';
 	//$sql="select vertexid from vertexinfo where name='{$fname}';";
 	//echo $sql;
-	$fidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$fname}';");
+	$fidres=mysqli_query($con,"select vertexid,x,y from vertexinfo where name='{$fname}';");
 	$fidrow=mysqli_fetch_array($fidres);
 	$fid=$fidrow['vertexid'];
+	$fx=$fidrow['x'];
+	$fy=$fidrow['y'];
 //	echo $fid;
-	$tidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$tname}';");
+	$tidres=mysqli_query($con,"select vertexid,x,y from vertexinfo where name='{$tname}';");
 	$tidrow=mysqli_fetch_array($tidres);
 	$tid=$tidrow['vertexid'];
+	$tx=$tidrow['x'];
+	$ty=$tidrow['y'];
 	
 	$result=mysqli_query($con,"select dist,cap from edgeinfo where fromv={$fid} and tov={$tid}");
 	$row=mysqli_fetch_array($result);
 	$dist=$row['dist'];
 	$cap=$row['cap'];
+	
+	if($dist==0)
+	{
+		$dist=ceil(sqrt(($fx-$tx)*($fx-$tx)+($fy-$ty)*($fy-$ty)));
+	}
 	//echo 'hehehehehehehehehhehehehehehehehe';
 	//echo $dist." ".$cap;
 ?>
@@ -73,7 +82,7 @@
 				<div class="grid">
 					<div class="titlefont">距离
 					</div>
-					<input type="text" id="Dist" name="dist" value="<?php echo $dist;?>" />
+					<input type="text" id="Dist" name="dist" readonly="readonly" value="<?php echo $dist;?>" />
 				</div>
 				<div class="grid">
 					<div class="titlefont">容量
