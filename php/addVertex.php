@@ -25,9 +25,13 @@
 		//$purl=$_SERVER['HTTP_REFERER'];
 		$edgeinfo=$newedge;
 		$edgeinfo=explode("-",$edgeinfo);
-		$tovid=$edgeinfo[0];
+		$tovname=$edgeinfo[0];
 		$dist=$edgeinfo[1];
 		$cap=$edgeinfo[2];
+		
+		$tovidres=mysqli_query($con,"select vertexid from vertexinfo where name='{$tovname}'");
+		$tovidrow=mysqli_fetch_array($tovidres);
+		$tovid=$tovidrow['vertexid'];
 		
 		if	(!mysqli_query($con,"insert into edgeinfo values ({$vid},{$tovid},{$dist},{$cap})")){
 			die(mysqli_error($con));
