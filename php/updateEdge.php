@@ -30,6 +30,9 @@
 		if	(!mysqli_query($con,"update edgeinfo set dist={$dist},cap={$cap} where fromv={$fid} and tov={$tid};")){
 			die(mysqli_error($con));
 		}
+		if	(!mysqli_query($con,"update edgeinfo set dist={$dist},cap={$cap} where fromv={$tid} and tov={$fid};")){
+			die(mysqli_error($con));
+		}
 	}
 	echo '<script>';
 	echo 'alert("update success!");parent.location.href="../";';

@@ -28,12 +28,22 @@
 		discBar.innerHTML=posDis[ind];			
 		changeSelectPos(ind);
 		
-		var fiv=document.getElementById('fromv').value;
-		var tiv=document.getElementById('tov').value;
-		if(fiv==posName[ind])	fiv="";
-		else if(tiv==posName[ind]) tiv="";
-		else if(fiv=="")	fiv=posName[ind];
-		else if(tiv=="")	tiv=posName[ind];
+		var fi=document.getElementById('fromv');
+		var ti=document.getElementById('tov');
+		//var fiv=fi.value;
+		//var tiv=ti.value;
+		if(fi.value==posName[ind])	fi.value="";
+		else if(ti.value==posName[ind]) ti.value="";
+		else if(fi.value=="")	fi.value=posName[ind];
+		else if(ti.value=="")	ti.value=posName[ind];
+		if(fi.value!=""&&ti.value!="")
+		{
+			document.getElementById("changeBut").disabled=false;
+		}
+		else
+		{
+			document.getElementById("changeBut").disabled=true;
+		}
 	}
 	function changeSelectPos(ind){
 		selectPos=ind;
@@ -128,6 +138,13 @@
 			document.getElementById("changeBut").disabled=true;
 		}
 	}
+	
+	function changePos()
+	{
+		var fiv=document.getElementById('fromv').value;
+		var tiv=document.getElementById('tov').value;
+		window.location.href="updateEdge.html?fromname="+fiv+"&toname="+tiv;
+	}
 </script>
 <link href="css/mapLayout.css" rel="stylesheet" type="text/css" />
 <style>
@@ -209,9 +226,9 @@
             </button>
         </div>
 		<div class="bar">		
-			<input id="fromv" value=""/>
-			<input id="tov" value=""/>
-			<button class="titleFont" id="changeBut" disabled="disabled" value="修改点相邻的边">修改点相邻的边
+			<input id="fromv" value="" onchange="checkFTinput()"/>
+			<input id="tov" value="" onchange="checkFTinput()"/>
+			<button class="titleFont" id="changeBut" disabled="disabled" value="修改点相邻的边" onclick="changePos()">修改点相邻的边
 			</button>
 		</div>
     </div>
