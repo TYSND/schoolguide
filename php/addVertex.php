@@ -40,5 +40,7 @@
 			die(mysqli_error($con));
 		}
 	}
-	
+	echo '<script>';
+	echo 'parent.location.href="../addVertex.html";';
+	echo '</script>';
 ?>
