@@ -46,7 +46,7 @@
 					alert("ok!"+xmlHttp.responseText);
 					var res=xmlHttp.responseText;
 					var resArray=res.split("-");
-					document.getElementById("shortpathans").innerHTML=resArray[0];
+					document.getElementById("shortpathans").innerHTML=Math.round(resArray[0]*1.3125)+"米";
 					
 					//重画红色路径
 					reDrawRedLine(resArray);

@@ -56,7 +56,7 @@ function drawPos(){
 	{
 		var str;
 		if (isHide[index]==0){
-			str="<div class=\"position flexCenter infoFont\" style=\"top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
+			str="<div class=\"position flexCenter infoFont\" style=\"top:"+(posY[index]-20)+"px;left:"+(posX[index]-40)+"px;\""+
 			"onclick=\"changeShowPos(\'"+index+"\')\"><img src=\"image/location-sign.png\" style=\"float:left\"/>"+
 			"<div style=\"float:left\">"+
 			posName[index]+
