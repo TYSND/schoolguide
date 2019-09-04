@@ -4,8 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <title>addVertex</title>
+<script src="js/drawMap.js"></script>
 <script>
 	var newPosX=0,newPosY=0;
+	
+	<?php require "php/setPositionInfoArray.php";?>
+
+	
 	function addEdge(){
 //		alert("dsd");
 		var tovid=document.getElementById("tovid").value;
@@ -74,40 +79,26 @@
 <body>
 	<div style="float:left;width:70%">
         <!--点的坐标比线端点坐标要减去圆的半径-->
-        <div class="newPosition" id="newPos" style="left:0;top:0;">
-        </div>
-        <div class="position flexCenter infoFont" style="top:50px;left:150px;" onclick="changeShowPos('0')">
-			<img src="image/position.png" style="float:left"/>
-            <div style="float:left">
-            图书馆
-            </div>
-        </div>
-        <div class="position flexCenter infoFont" style="left:200px;top:350px;" onclick="changeShowPos('1')">
-            宿舍
-        </div>
-        <div class="position" style="left:200px;top:450px;" onclick="changeShowPos('2')">
-            食堂
-        </div>
-        <div class="position" style="left:450px;top:50px;" onclick="changeShowPos('3')">
-            教学楼
-        </div>      
-        <div class="position" style="left:500px;top:550px;" onclick="changeShowPos('4')">
-            操场
-        </div>
-        <canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)">
-            <script>
-            //画路线
-                var c=document.getElementById("canvas");
-                var ctx=c.getContext("2d");
-                ctx.moveTo(200,100);
-                ctx.lineTo(250,400);
-                ctx.lineTo(250,500);
-                ctx.stroke();
-                ctx.moveTo(500,100);
-                ctx.lineTo(550,600);
-                ctx.stroke();
-            </script>
-        </canvas>
+		<div id="posField">
+		</div>
+		<script>
+		//画出所有地点
+			var posField=document.getElementById("posField");
+			for (var index in posName)
+			{
+				var str="<div class=\"position flexCenter infoFont\" style=\"top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
+				"onclick=\"changeShowPos(\'"+index+"\')\"><img src=\"image/location-sign.png\" style=\"float:left\"/>"+
+				"<div style=\"float:left\">"+
+				posName[index]+
+				"</div>"+
+				"</div>";
+				posField.innerHTML+=str;
+			}
+			
+		</script>
+		<canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)"></canvas>
+		<script>drawMap();
+		</script>
     </div>
 	<form action="php/addVertex.php" method="post">
         <div style="float:left;width:20%;">

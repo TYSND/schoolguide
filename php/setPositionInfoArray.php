@@ -2,7 +2,13 @@
 		
 		require "php/dblogin.php";
 		$result=mysqli_query($con,"select * from vertexinfo where ishide=0");
-		
+		echo '
+				var posName=[];
+				var posDis=[];
+				var posX=[],posY=[];
+				var edges=[];
+			';
+			
 		while ($row=mysqli_fetch_array($result))
 		{
 			echo 'posName["'.$row['vertexid'].'"]="'.$row['name'].'";';
