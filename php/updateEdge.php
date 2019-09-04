@@ -21,6 +21,9 @@
 		if	(!mysqli_query($con,"delete from edgeinfo where fromv={$fid} and tov={$tid};")){
 			die(mysqli_error($con));
 		}
+		if	(!mysqli_query($con,"delete from edgeinfo where fromv={$tid} and tov={$fid};")){
+			die(mysqli_error($con));
+		}
 	}
 	else
 	{
