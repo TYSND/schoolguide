@@ -42,7 +42,7 @@ function reDrawRedLine(resArray){
 			ctx.lineWidth="7";
 		}
 		else{
-			ctx.strokeStyle='rgba(0,0,0,0.4)';
+			ctx.strokeStyle='rgba(0,0,0,0.1)';
 			ctx.lineWidth="5";
 		}
 		ctx.moveTo(posX[fromv],posY[fromv]);
