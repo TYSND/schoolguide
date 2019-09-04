@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改点</title>
+
+		<link href="css/indexlayout.css" rel="stylesheet" type="text/css" />
+		<script src="js/public-header.js"></script>
+
+	</head>
+	<style>
+	.blackbut{
+		text-align:center;
+		font-size:16px;
+		color:white;
+		font-family:"微软雅黑","黑体";
+		font-weight:bold;
+		display:flex;
+		align-items:center;
+		margin-left:5px;
+		margin-right:5px;
+		border-radius:6px;
+		width:60px;
+		height:28px;
+		background:RGB(0,0,51);
+		border:none;
+		padding-left:15px;
+		padding-right:15px;
+	}
+	</style>
+<body>
+
+<div class="topblacktitle">
+	修改点
+</div>
+<form method="post" action="php/updateVertex.php" enctype="multipart/form-data" onsubmit="">
+<?php
+	$vname=$_GET['vertexname'];
+	require 'php/dblogin.php';
+	$vdescres=mysqli_query($con,"select descript from vertexinfo where name='{$vname}';");
+	$vdescrow=mysqli_fetch_array($vdescres);
+	$vdesc=$vdescrow['descript'];
+?>
+        <div class="bar">
+			<div style="float:left;">
+				<div >名字
+				</div>
+				<input type="text" id="Name" name="vertexname" value="<?php echo $vname;?>"/>
+			</div>
+			<div style="float:left;margin-left:20px;">
+				<div >简介
+				</div>
+				<textarea name="vertexdescript" value="<?php echo $vdesc; ?>"></textarea>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+
+		<div class="bar">
+				<div class="submitButton">
+					<input  type="submit" class="blackbut" id="submitbutton" value="提交" onmousedown="document.getElementById('submitbutton').style='width:50px;height:20px;';" 
+					onmouseup="document.getElementById('submitbutton').style='width:60px;height:28px;';" >
+				</div>
+		</div>
+		
+</form>
+</body>
+
+</html>
