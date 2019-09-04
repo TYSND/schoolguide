@@ -101,19 +101,7 @@
 		</div>
 		<div class="newPosition" id="newPos" style="left:0;top:0;"></div>
 		<script>
-		//画出所有地点
-			var posField=document.getElementById("posField");
-			for (var index in posName)
-			{
-				var str="<div class=\"position flexCenter infoFont\" style=\"top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
-				"onclick=\"changeShowPos(\'"+index+"\')\"><img src=\"image/location-sign.png\" style=\"float:left\"/>"+
-				"<div style=\"float:left\">"+
-				posName[index]+
-				"</div>"+
-				"</div>";
-				posField.innerHTML+=str;
-			}
-			
+			drawAllPosCross();
 		</script>
 		<img src="image/map.jpg" style="display:none" id="mapPic"/>
 		<canvas id="canvas" width="1085px" height="529px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)"></canvas>

@@ -22,6 +22,16 @@
 		text-shadow:0px 0px 1px black,0px 0px 1px black,0px 0px 1px black,0px 0px 1px black,0px 0px 1px black;
 		*/
 	}
+	
+	.cross{
+		width:10px;
+		height:10px;
+		border-radius:10px;
+		border:solid 1px white;
+		background-color:white;
+		position:absolute;
+		box-shadow:0 0 2px black;
+	}
 	.bar{
 		background:white;
 		margin-bottom:10px;

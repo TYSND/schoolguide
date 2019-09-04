@@ -76,3 +76,31 @@ function drawPos(){
 		posField.innerHTML+=str;
 	}
 }
+
+//为增加点页面提供，把所有点画成小的圆点并标出名称
+function drawAllPosCross()
+{
+	var posField=document.getElementById("posField");
+	for (var index in posName)
+	{
+		var str;
+		var xx=Number(posX[index])+3,yy=Number(posY[index])+3;
+		str="<div "+
+			"class=\"cross infoFont\""+
+			" onclick=\"changeShowPos(\'"+index+"\')\""+
+			"style=\"width:10px;top:"+(yy)+"px;left:"+(xx)+"px;\">"+
+			"</div>";
+			
+		posField.innerHTML+=str;
+	}
+	for (var index in posName)
+	{
+		var str;
+		var xx=Number(posX[index])+3,yy=Number(posY[index])+3;
+		str="<div class=\"infoFont\" style=\"position:absolute;top:"+(yy-3-3)+"px;left:"+(xx+7+3)+"px\">"+
+			posName[index]+
+			"</div>";
+		posField.innerHTML+=str;
+	}
+	
+}
