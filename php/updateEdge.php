@@ -27,11 +27,36 @@
 	}
 	else
 	{
-		if	(!mysqli_query($con,"update edgeinfo set dist={$dist},cap={$cap} where fromv={$fid} and tov={$tid};")){
-			die(mysqli_error($con));
+/*
+select count(*) as cnt
+from edgeinfo
+where
+fromv=2 and tov=6;
+
+*/		
+		$cntres=mysqli_query($con,"select count(*) as cnt
+									from edgeinfo
+									where
+									fromv={$fid} and tov={$tid};
+							");
+		$cntrow=mysqli_fetch_array($cntres);
+		if($cntrow['cnt']==0)
+		{
+			if	(!mysqli_query($con,"insert into edgeinfo values ({$fid},{$tid},{$dist},{$cap})")){
+				die(mysqli_error($con));
+			}
+			if	(!mysqli_query($con,"insert into edgeinfo values ({$tid},{$fid},{$dist},{$cap})")){
+				die(mysqli_error($con));
+			}
 		}
-		if	(!mysqli_query($con,"update edgeinfo set dist={$dist},cap={$cap} where fromv={$tid} and tov={$fid};")){
-			die(mysqli_error($con));
+		else
+		{
+			if	(!mysqli_query($con,"update edgeinfo set dist={$dist},cap={$cap} where fromv={$fid} and tov={$tid};")){
+				die(mysqli_error($con));
+			}
+			if	(!mysqli_query($con,"update edgeinfo set dist={$dist},cap={$cap} where fromv={$tid} and tov={$fid};")){
+				die(mysqli_error($con));
+			}
 		}
 	}
 	echo '<script>';
