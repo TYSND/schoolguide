@@ -10,10 +10,10 @@ function drawMap(){
 		var tov=edges[i][1],fromv=edges[i][0];
 		console.log(fromv+"  "+tov+"\n");
 		ctx.beginPath();
+		ctx.strokeStyle='rgba(0,0,0,0.1)';
+		ctx.lineWidth="5";
 		ctx.moveTo(posX[fromv],posY[fromv]);
 		ctx.lineTo(posX[tov],posY[tov]);
-		ctx.strokeStyle='rgba(0,0,0,0.4)';
-		ctx.lineWidth="5";
 		ctx.stroke();
 	}
 }
@@ -58,7 +58,7 @@ function drawPos(){
 	{
 		var str;
 		if (isHide[index]==0){
-			str="<div class=\"position flexCenter infoFont\" style=\"top:"+(posY[index]-20)+"px;left:"+(posX[index]-40)+"px;\""+
+			str="<div class=\"position flexCenter infoFont\" style=\"top:"+(posY[index]-16)+"px;left:"+(posX[index]-4)+"px;\""+
 			"onclick=\"changeShowPos(\'"+index+"\')\"><img src=\"image/location-sign.png\" style=\"float:left\"/>"+
 			"<div style=\"float:left\">"+
 			posName[index]+
@@ -66,10 +66,11 @@ function drawPos(){
 			"</div>";
 		}
 		else{
+			var xx=Number(posX[index])+3,yy=Number(posY[index])+3;
 			str="<div "+
 				"class=\"cross\""+
 				" onclick=\"changeShowPos(\'"+index+"\')\""+
-				"style=\"width:10px;top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
+				"style=\"width:10px;top:"+(yy)+"px;left:"+(xx)+"px;\">"+
 				"</div>";
 		}
 		posField.innerHTML+=str;
