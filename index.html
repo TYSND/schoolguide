@@ -6,7 +6,7 @@
 <script src="js/drawMap.js"></script>
 <script>
 	
-	
+	window.onload=drawMap;
 	<?php require "php/setPositionInfoArray.php";?>
 	
 	var selectPos=-1;
@@ -43,26 +43,9 @@
 					document.getElementById("shortpathans").innerHTML=resArray[0];
 					
 					//重画红色路径
-					
-					for (var i=1;i<resArray.length-1;i++)
-					{
-						var ctx=getCanvasHandle();
-						var tmpfromv=resArray[i],tmptov=resArray[i+1];
-						alert("draw |"+tmpfromv+"| and |"+tmptov+"|");
-						alert("draw "+posX[tmpfromv]+" and "+posY[tmpfromv]);
-						ctx.beginPath();
-						
-						ctx.moveTo(posX[tmpfromv],posY[tmpfromv]);
-						ctx.lineTo(posX[tmptov],posY[tmptov]);
-
-						ctx.strokeStyle='rgba(255,102,89,0.2)';
-						ctx.lineWidth="7";
-//						ctx.fillStyle='rgba(255,102,89,1.0)';
-						ctx.lineJoin="round";
-						ctx.stroke();
-					}
+					reDrawRedLine(resArray);
 				}
-				else	alert("??????");
+				else	alert("xmlHttp request failed");
 		 };	 
 	}
 	
@@ -97,7 +80,7 @@
 </head>
 
 <body>
-	<div style="float:left;width:70%">
+	<div style="float:left;width:75%">
         <!--点的坐标比线端点坐标要减去圆的半径-->
 		<div id="posField">
 		</div>
@@ -115,13 +98,12 @@
 				posField.innerHTML+=str;
 			}
 		</script>
-        
-        <canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left">
+        <img src="image/map.jpg" style="display:none" id="mapPic"/>
+        <canvas id="canvas" width="1085px" height="529px" style="border:solid black 1px;float:left">
             
-		<script>drawMap();</script>
         </canvas>
     </div>
-    <div style="float:left" style="width:20%">
+    <div style="float:left;width:20%">
         <div class="bar">
         	<div class="titleFont">地名
             </div>

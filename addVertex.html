@@ -7,7 +7,7 @@
 <script src="js/drawMap.js"></script>
 <script>
 	var newPosX=0,newPosY=0;
-	
+	window.onload=drawMap;
 	<?php require "php/setPositionInfoArray.php";?>
 
 	
@@ -97,12 +97,11 @@
 			}
 			
 		</script>
-		<canvas id="canvas" width="1000px" height="700px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)"></canvas>
-		<script>drawMap();
-		</script>
+		<img src="image/map.jpg" style="display:none" id="mapPic"/>
+		<canvas id="canvas" width="1085px" height="529px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)"></canvas>
     </div>
-	<form action="php/addVertex.php" method="post">
-        <div style="float:left;width:20%;">
+    <div style="float:left;width:20%;margin-left:5%">
+		<form action="php/addVertex.php" method="post">
             <div class="bar" >
             	<div class="titleFont">坐标
                 </div>
@@ -118,8 +117,9 @@
                 <input type="text" name="vertexname"/>
                 <div class="titleFont">介绍
                 </div>
-                
-                <textarea name="vertexdescript"></textarea>
+				<textarea name="vertexdescript"></textarea>
+                <div>无名路口</div>
+                <input type="checkbox" name="noName" />
                 <input style="display:none" name="x" id="x"/>
                 <input style="display:none" name="y" id="y"/>
                 <div id="edgesField">
@@ -130,12 +130,13 @@
                     <input  id="dist"/>            
                     <div>人流量</div>	
                     <input  id="cap"/>
-                            
+
                 </div>
                 <div onclick="addEdge()">增加边</div>
                 <input type="submit"/>
             </div>
-        </div>
-    </form>
+		</form>
+    </div>
+	<div style="clear:both"></div>
 </body>
 </html>

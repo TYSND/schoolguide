@@ -17,9 +17,11 @@
 			echo 'posY["'.$row['vertexid'].'"]="'.$row['y'].'";';
 		}
 		
-		$result=mysqli_query($con,"select fromv,tov from edgeinfo where fromv not in 
+		$result=mysqli_query($con,"select fromv,tov from edgeinfo ");
+		/*
+			where fromv not in 
 			(select vertexid from vertexinfo where ishide=1) and tov not in (select vertexid from vertexinfo where ishide=1)");
-		
+		*/
 		while ($row=mysqli_fetch_array($result))
 		{
 			//echo $row['fromv'].$row['tov']."\n";
