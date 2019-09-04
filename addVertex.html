@@ -7,7 +7,10 @@
 <script src="js/drawMap.js"></script>
 <script>
 	var newPosX=0,newPosY=0;
-	window.onload=drawMap;
+	window.onload=function(){
+		drawMap();
+		drawAllPosCross();
+	};
 	<?php require "php/setPositionInfoArray.php";?>
 
 	
@@ -100,11 +103,11 @@
 		<div id="posField">
 		</div>
 		<div class="newPosition" id="newPos" style="left:0;top:0;"></div>
-		<script>
-			drawAllPosCross();
-		</script>
 		<img src="image/map.jpg" style="display:none" id="mapPic"/>
 		<canvas id="canvas" width="1085px" height="529px" style="border:solid black 1px;float:left" onclick="changeNewPos(event)"></canvas>
+		<script>
+			
+		</script>
     </div>
     <div style="float:left;width:20%;margin-left:5%">
 		<form action="php/addVertex.php" method="post">
@@ -138,10 +141,11 @@
                     <input  id="cap"/>
 
                 </div>
-                <div onclick="addEdge()">增加边</div>
                 <input type="submit"/>
-            </div>
 		</form>
+                <button onclick="addEdge()">增加边</button>
+            </div>
+		<button onclick="window.location.href='index.html'">回主页</button>
     </div>
 	<div style="clear:both"></div>
 </body>

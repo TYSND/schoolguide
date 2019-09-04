@@ -97,10 +97,16 @@ function drawAllPosCross()
 	{
 		var str;
 		var xx=Number(posX[index])+3,yy=Number(posY[index])+3;
+		var c=document.getElementById("canvas");
+		var ctx=c.getContext("2d");
+		ctx.font="12px 微软雅黑 black";
+		ctx.fillText(posName[index],xx,yy);
+		/*
 		str="<div class=\"infoFont\" style=\"position:absolute;top:"+(yy-3-3)+"px;left:"+(xx+7+3)+"px\">"+
 			posName[index]+
 			"</div>";
 		posField.innerHTML+=str;
+		*/
 	}
 	
 }
