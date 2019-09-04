@@ -38,8 +38,8 @@
 	}
 	//计算最短路
 	function func1(){
-		var fromv=document.getElementById("shortpathfrom").value,
-			tov=document.getElementById("shortpathto").value;
+		var fromv=document.getElementById("funcpathfrom").value,
+			tov=document.getElementById("funcpathto").value;
 		var str="shortpathfrom="+fromv+"&shortpathto="+tov;
 		var xmlHttp=getXMLHttpRequest("POST","php/shortPath&Maxflow.php");
 		xmlHttp.send(str);
@@ -51,13 +51,33 @@
 					alert("ok!"+xmlHttp.responseText);
 					var res=xmlHttp.responseText;
 					var resArray=res.split("-");
-					document.getElementById("shortpathans").innerHTML=Math.round(resArray[0]*1.3125)+"米";
+					document.getElementById("funcpathans").innerHTML="最短距离为"+Math.round(resArray[0]*1.3125)+"米";
 					
 					//重画红色路径
 					reDrawRedLine(resArray);
 				}
 				else	alert("xmlHttp request failed");
-		 };	 
+		 };
+	}
+	
+	function func2(){
+		var fromv=document.getElementById("funcpathfrom").value,
+			tov=document.getElementById("funcpathto").value;
+		var str="maxflowfrom="+fromv+"&maxflowto="+tov;
+		var xmlHttp=getXMLHttpRequest("POST","php/shortPath&Maxflow.php");
+		xmlHttp.send(str);
+		xmlHttp.onreadystatechange=function(){
+			if (xmlHttp.readyState==4)
+			// 4 = "loaded"
+				if (xmlHttp.status==200)
+				{// 200 = OK
+					alert("ok!"+xmlHttp.responseText);
+					var res=xmlHttp.responseText;
+					document.getElementById("funcpathans").innerHTML="最大流量为"+res;
+					
+				}
+				else	alert("xmlHttp request failed");
+		 };
 	}
 	
 	//开启并返回一个xmlhttprequest对象（未发送数据）
@@ -114,6 +134,10 @@
 		position:absolute;
 		box-shadow:0 0 2px black;
 	}
+	
+	.position,.cross:hover{
+		cursor:pointer;
+	}
 </style>
 
 </head>
@@ -129,20 +153,30 @@
 		</script>
         <img src="image/map.jpg" style="display:none" id="mapPic"/>
         <canvas id="canvas" width="1085px" height="529px" style="border:solid black 1px;float:left">
-            
         </canvas>
     </div>
     <div style="float:left;width:20%">
         <div class="bar">
         	<div class="titleFont">地名
             </div>
-            <div id="showPosName" class="infoFont" style="height:100px;width:100%">
+            <div id="showPosName" class="infoFont" style="height:50px;width:100%">
             </div>
             <div class="titleFont">信息
             </div>
-            <div id="showPosDis" class="infoFont" style="height:200px;width:100%">
+            <div id="showPosDis" class="infoFont" style="height:100px;width:100%">
             </div>        
         </div>
+		<!--功能部分-->
+		<div class="bar">
+			<div class="titleFont">起点</div>
+			<input type="text" id="funcpathfrom" />
+			<div class="titleFont">终点</div>
+			<input type="text" id="funcpathto" />
+			<div class="infoFont" id="funcpathans"></div>
+			<button type="submit" onclick="func1()">最短路</button>
+			<button type="submit" onclick="func2()">最大流量</button>
+		</div>
+		<!--修改部分-->
         <div class="bar">
     		<div style="clear:both"></div>
         	<button class="titleFont" value="增加点" onclick="window.location.href='addVertex.html'">增加点
@@ -154,12 +188,7 @@
             <button class="titleFont" id="changeBut" disabled="disabled" value="修改点相邻的边">修改点相邻的边
             </button>
         </div>
-		<div class="bar">
-			<input type="text" id="shortpathfrom" />
-			<input type="text" id="shortpathto" />
-			<div class="infoFont" id="shortpathans"></div>
-			<button type="submit" onclick="func1()">最短路</button>
-		</div>
+		
     </div>
     <div style="clear:both"></div>
     

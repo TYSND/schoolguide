@@ -12,6 +12,8 @@ function drawMap(){
 		ctx.beginPath();
 		ctx.moveTo(posX[fromv],posY[fromv]);
 		ctx.lineTo(posX[tov],posY[tov]);
+		ctx.strokeStyle='rgba(0,0,0,0.4)';
+		ctx.lineWidth="5";
 		ctx.stroke();
 	}
 }
@@ -40,8 +42,8 @@ function reDrawRedLine(resArray){
 			ctx.lineWidth="7";
 		}
 		else{
-			ctx.strokeStyle='black';
-			ctx.lineWidth='2';
+			ctx.strokeStyle='rgba(0,0,0,0.4)';
+			ctx.lineWidth="5";
 		}
 		ctx.moveTo(posX[fromv],posY[fromv]);
 		ctx.lineTo(posX[tov],posY[tov]);
