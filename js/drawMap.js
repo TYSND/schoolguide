@@ -64,9 +64,10 @@ function drawPos(){
 			"</div>";
 		}
 		else{
-			str="<div style=\"width:10px;top:"+posY[index]+"px;left:"+posX[index]+"px;"+
-				"height:10px;border-radius:10px;border:solid 1px white;"+
-				"background-color:white;position:absolute;box-shadow:0 0 1px black;\">"+
+			str="<div "+
+				"class=\"cross\""+
+				" onclick=\"changeShowPos(\'"+index+"\')\""+
+				"style=\"width:10px;top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
 				"</div>";
 		}
 		posField.innerHTML+=str;
