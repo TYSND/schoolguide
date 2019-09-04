@@ -50,3 +50,25 @@ function reDrawRedLine(resArray){
 	
 }
 
+function drawPos(){
+	var posField=document.getElementById("posField");
+	for (var index in posName)
+	{
+		var str;
+		if (isHide[index]==0){
+			str="<div class=\"position flexCenter infoFont\" style=\"top:"+posY[index]+"px;left:"+posX[index]+"px;\""+
+			"onclick=\"changeShowPos(\'"+index+"\')\"><img src=\"image/location-sign.png\" style=\"float:left\"/>"+
+			"<div style=\"float:left\">"+
+			posName[index]+
+			"</div>"+
+			"</div>";
+		}
+		else{
+			str="<div style=\"width:10px;top:"+posY[index]+"px;left:"+posX[index]+"px;"+
+				"height:10px;border-radius:10px;border:solid 1px white;"+
+				"background-color:white;position:absolute;box-shadow:0 0 1px black;\">"+
+				"</div>";
+		}
+		posField.innerHTML+=str;
+	}
+}
