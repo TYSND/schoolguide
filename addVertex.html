@@ -13,15 +13,15 @@
 	
 	function addEdge(){
 //		alert("dsd");
-		var tovid=document.getElementById("tovid").value;
+		var tovname=document.getElementById("tovname").value;
 		var dist=document.getElementById("dist").value;
 		var cap=document.getElementById("cap").value;
-		var str=tovid+"-"
+		var str=tovname+"-"
 				+dist+"-"
 				+cap;
 		document.getElementById("edgesField").innerHTML+=(
 		"<div style=\"float:left\>"+
-			"<div style=\"float:left\">从新结点到"+tovid+"号结点 距离"+dist+" 人流量"+cap+"</div>"+
+			"<div style=\"float:left\">从新结点到"+tovname+"结点 距离"+dist+" 人流量"+cap+"</div>"+
 			"<input style=\"display:none\" value=\""+str+"\"name=\"edges[]\" />"+
 			"<img style=\"float:left;\" src=\"image/cancel.png\" onclick=\"clickDelete(event)\"/>"+
 		"</div>");
@@ -59,6 +59,24 @@
 	   };  
 	}
 	*/
+	
+	//计算距离
+	function getDist()
+	{
+		var toname=document.getElementById('tovname').value;
+		var tx,ty;
+		for (var index in posName)
+		{
+			if(posName[index]==toname)
+			{
+				tx=posX[index];ty=posY[index];
+				break;
+			}
+		}
+		var dist=Math.sqrt((newPosX-tx)*(newPosX-tx)+(newPosY-ty)*(newPosY-ty));
+		dist=Math.ceil(dist);
+		document.getElementById('dist').value=dist;
+	}
 </script>
 
 <link href="css/mapLayout.css" rel="stylesheet" type="text/css" />
@@ -125,7 +143,7 @@
                 <div id="edgesField">
                 
                     <div>从新结点到</div>
-                    <input  id="tovid"/>
+                    <input  id="tovname" onchange="getDist()"/>
                     <div>距离</div>
                     <input  id="dist"/>            
                     <div>人流量</div>	
