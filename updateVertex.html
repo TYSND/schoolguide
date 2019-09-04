@@ -33,9 +33,10 @@
 <div class="topblacktitle">
 	修改点
 </div>
-<form method="post" action="php/updateVertex.php" enctype="multipart/form-data" onsubmit="">
+<form method="post"  enctype="multipart/form-data" onsubmit="">
 <?php
 	$vname=$_GET['vertexname'];
+	$oldname=$vname;
 	require 'php/dblogin.php';
 	$vdescres=mysqli_query($con,"select descript from vertexinfo where name='{$vname}';");
 	$vdescrow=mysqli_fetch_array($vdescres);
@@ -50,7 +51,7 @@
 			<div style="float:left;margin-left:20px;">
 				<div >简介
 				</div>
-				<textarea name="vertexdescript" value="<?php echo $vdesc; ?>"></textarea>
+				<textarea name="vertexdescript" ><?php echo $vdesc; ?></textarea>
 			</div>
 			<div style="clear:both"></div>
 		</div>
@@ -63,6 +64,26 @@
 		</div>
 		
 </form>
+
+<?php
+if($_POST)
+{
+	$vname=$_POST['vertexname'];
+	$vdesc=$_POST['vertexdescript'];
+	$sql="update vertexinfo set name='{$vname}',descript='{$vdesc}' where name='{$oldname}';";
+	//echo $sql;
+	//exit();
+	$result=mysqli_query($con,$sql);
+	if(!$result)
+	{
+		echo mysqli_error($con);
+		exit();
+	}
+	echo '<script>';
+	echo 'alert("update success!");parent.location.href="index.html";';
+	echo '</script>';
+}
+?>
 </body>
 
 </html>
