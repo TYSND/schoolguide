@@ -72,7 +72,10 @@
 					document.getElementById("funcpathans").innerHTML="最短距离为"+Math.round(resArray[0]*1.3125)+"米";
 					
 					//重画红色路径
-					reDrawRedLine(resArray);
+					var redEdge=[];
+					for (var i=1;i<resArray.length-1;i++)
+						redEdge.push(resArray[i]+"-"+resArray[i+1]);
+					reDrawRedLine(resEdge);
 				}
 				else	alert("xmlHttp request failed");
 		 };
@@ -91,8 +94,13 @@
 				{// 200 = OK
 					alert("ok!"+xmlHttp.responseText);
 					var res=xmlHttp.responseText;
+					var resArray=res.split("-");
 					document.getElementById("funcpathans").innerHTML="最大流量为"+res;
 					
+					var redEdge=[];
+					for (var i=1;i<resArray.length-1;i+=2)
+						redEdge.push(resArray[i]+"-"+resArray[i+1]);
+					reDrawRedLine(resEdge);
 				}
 				else	alert("xmlHttp request failed");
 		 };

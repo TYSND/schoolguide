@@ -19,16 +19,15 @@ function drawMap(){
 }
 
 //最短路之后重画红色路径
-function reDrawRedLine(resArray){
+function reDrawRedLine(resEdge){
 	var c=document.getElementById("canvas");
 	var ctx=c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);
 	var mapPic=document.getElementById("mapPic");
 	ctx.drawImage(mapPic,0,0);
 	
-	var redEdge=[];
-	for (var i=1;i<resArray.length-1;i++)
-			redEdge.push(resArray[i]+"-"+resArray[i+1]);
+	
+	
 	for (var i=0;i<redEdge.length;i++)
 	{
 		//console.log(read	);

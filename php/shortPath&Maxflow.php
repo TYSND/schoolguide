@@ -67,10 +67,27 @@ else if($mff!=""&&$mft!="")
 	//print_r($result);
 	$filename ="result.out";
 	$handle  = fopen ($filename, "r");
+	$res="";	
 	while (!feof ($handle)) 
 	{
-		echo fgets($handle);
+		$line = fgets($handle);
+		//$line = trim($line);
+		//获得当前平台换行符长度
+		$changeLineLength = strlen(PHP_EOL);
+		//当前数据长度
+		$lineLength = strlen($line);
+		//如果当前长度为0或者是空行则跳过
+		if ($lineLength == 0 || $lineLength == $changeLineLength) {
+			continue;
+		}
+		//裁剪字符串数据，去掉结尾换行符
+		if (substr($line,-$changeLineLength) == PHP_EOL) {
+			$line = substr($line,0,$lineLength-$changeLineLength);
+		}
+		//echo $line;
+		$res=$res.$line."-";	
 	}
+	$res=substr($res, 0, -1);
 	fclose ($handle);
 }
 
