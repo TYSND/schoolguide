@@ -66,7 +66,7 @@
 			// 4 = "loaded"
 				if (xmlHttp.status==200)
 				{// 200 = OK
-					alert("ok!"+xmlHttp.responseText);
+					//alert("ok!"+xmlHttp.responseText);
 					var res=xmlHttp.responseText;
 					var resArray=res.split("-");
 					document.getElementById("funcpathans").innerHTML="最短距离为"+Math.round(resArray[0]*1.3125)+"米";
@@ -92,7 +92,7 @@
 			// 4 = "loaded"
 				if (xmlHttp.status==200)
 				{// 200 = OK
-					alert("ok!"+xmlHttp.responseText);
+					//alert("ok!"+xmlHttp.responseText);
 					var res=xmlHttp.responseText;
 					//console.log(res);
 					var resArray=res.split("-");
@@ -103,7 +103,7 @@
 					{
 						redEdge.push(resArray[i]+"-"+resArray[i+1]);
 					}
-					alert(redEdge);
+					//alert(redEdge);
 					reDrawRedLine(redEdge);
 				}
 				else	alert("xmlHttp request failed");
