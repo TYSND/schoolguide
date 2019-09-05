@@ -23,16 +23,22 @@
 				+dist+"-"
 				+cap;
 		document.getElementById("edgesField").innerHTML+=(
-		"<div style=\"float:left\>"+
-			"<div style=\"float:left\">从新结点到"+tovname+"结点 距离"+dist+" 人流量"+cap+"</div>"+
+		"<div style=\"float:left;margin:5px 0 5px 0;box-shadow:0 0 2px black;\" class=\"flexCenter\">"+
+			"<div style=\"float:left\" class=\"infoFont\">从新结点到"+tovname+"结点 距离"+dist+" 人流量"+cap+"</div>"+
 			"<input style=\"display:none\" value=\""+str+"\"name=\"edges[]\" />"+
-			"<img style=\"float:left;\" src=\"image/cancel.png\" onclick=\"clickDelete(event)\"/>"+
+			"<img style=\"float:left;\" src=\"image/cancel.png\" width=\"16px\" onclick=\"clickDelete(event)\"/>"+
 		"</div>");
 	}
 	//点击删除添加的边
 	function clickDelete(event){
+		
 		var pp=event.target.parentNode.parentNode;
 		pp.removeChild(event.target.parentNode);
+		
+		/*
+		var pp=event.target.parentNode;
+		pp.removeChild(event.target);
+		*/
 	}
 	//点击画布更改新加的点的位置
 	function changeNewPos(e){
@@ -110,41 +116,42 @@
 		</script>
     </div>
     <div style="float:left;width:20%;margin-left:5%">
-		<form action="php/addVertex.php" method="post">
-            <div class="bar" >
-            	<div class="titleFont">坐标
-                </div>
-                <div class="titleFont" id="showPosX" style="float:left">0
-                </div>
-                <div class="titleFont"style="float:left">,
-                </div>
-                <div class="titleFont" id="showPosY" style="float:left">0
-                </div>
-                <div style="clear:both"></div>
-                <div class="titleFont">地名
-                </div>
-                <input type="text" name="vertexname"/>
-                <div class="titleFont">介绍
-                </div>
-				<textarea name="vertexdescript"></textarea>
-                <div>无名路口</div>
-                <input type="checkbox" name="noName" />
-                <input style="display:none" name="x" id="x"/>
-                <input style="display:none" name="y" id="y"/>
-                <div id="edgesField">
-                
-                    <div>从新结点到</div>
-                    <input  id="tovname" onchange="getDist()"/>
-                    <div>距离</div>
-                    <input  id="dist"/>            
-                    <div>人流量</div>	
-                    <input  id="cap"/>
-
-                </div>
-                <input type="submit"/>
-		</form>
-                <button onclick="addEdge()">增加边</button>
-            </div>
+        <div class="bar" >
+			<div>
+				<form action="php/addVertex.php" method="post" id="form">
+						<div class="titleFont">坐标
+						</div>
+						<div class="titleFont" id="showPosX" style="float:left">0
+						</div>
+						<div class="titleFont"style="float:left">,
+						</div>
+						<div class="titleFont" id="showPosY" style="float:left">0
+						</div>
+						<div style="clear:both"></div>
+						<div class="titleFont">地名
+						</div>
+						<input type="text" name="vertexname"/>
+						<div class="titleFont">介绍
+						</div>
+						<textarea name="vertexdescript"></textarea>
+						<div>无名路口(不需要名称)</div>
+						<input type="checkbox" name="noName" />
+						<input style="display:none" name="x" id="x"/>
+						<input style="display:none" name="y" id="y"/>                
+						<div>从新结点到</div>
+						<input  id="tovname" onchange="getDist()"/>
+						<div>距离</div>
+						<input  id="dist"/>            
+						<div>人流量</div>	
+						<input  id="cap"/>
+						<div id="edgesField">
+						
+						</div>
+				</form>
+						<button onclick="addEdge()">增加边</button>
+			</div>
+		</div>
+						<button onclick="document.getElementById('form').submit()">提交</button>
 		<button onclick="window.location.href='index.html'">回主页</button>
     </div>
 	<div style="clear:both"></div>
