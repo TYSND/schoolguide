@@ -88,6 +88,7 @@ else if($mff!=""&&$mft!="")
 		$res=$res.$line."-";	
 	}
 	$res=substr($res, 0, -1);
+	echo $res;
 	fclose ($handle);
 }
 

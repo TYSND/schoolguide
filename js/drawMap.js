@@ -19,7 +19,7 @@ function drawMap(){
 }
 
 //最短路之后重画红色路径
-function reDrawRedLine(resEdge){
+function reDrawRedLine(redEdge){
 	var c=document.getElementById("canvas");
 	var ctx=c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);

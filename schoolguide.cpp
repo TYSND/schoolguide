@@ -18,7 +18,7 @@ const int maxv=1e6+10,maxe=1e6+10;
 int head[maxv];
 struct Edge
 {
-	int to,nxt,dist,cap;
+	int to,nxt,dist,cap,vol;
 };
 Edge edge[2*maxe];
 int s,t; 
@@ -88,6 +88,23 @@ int main(int argc,char* argv[])
 	{
 		maxflowpathgraph();
 		cout<<maxflow()<<endl;
+		for(int i=1;i<=2*en;i++)
+		{
+			if(edge[i].vol!=edge[i].cap)
+			{
+				int f;
+				for(f=1;f<maxv;f++)
+				{
+					int k=0;
+					for(k=head[f];k;k=edge[k].nxt)
+					{
+						if(k==i)	break;
+					}
+					if(k)	break;
+				}
+				cout<<f<<endl;cout<<edge[i].to<<endl;
+			}
+		}
 	}
 	/*
 	for(int i=0;i<argc;i++)
@@ -143,6 +160,7 @@ void maxflowpathgraph()
 		edge[eid].to=to;
 		//edge[i].dist=einfo[i][2];
 		edge[eid].cap=cap;
+		edge[eid].vol=cap;
 		edge[eid].nxt=head[f];
 		head[f]=eid;
 		eid++;
@@ -150,6 +168,7 @@ void maxflowpathgraph()
 		edge[eid].to=f;
 		//edge[i].dist=einfo[i][2];
 		edge[eid].cap=0;
+		edge[eid].vol=0;
 		edge[eid].nxt=head[to];
 		head[to]=eid;
 	}
@@ -284,7 +303,7 @@ void query_sql(string& sql)
 		        /*
 		        column = mysql_num_fields(res_ptr);
 		        row = mysql_num_rows(res_ptr) + 1;
-		        printf("查询到 %lu 行 \n", row);
+		        
 		
 		       
 		        for (i = 0; field = mysql_fetch_field(res_ptr); i++)
