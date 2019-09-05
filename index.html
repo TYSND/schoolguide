@@ -161,7 +161,6 @@
 	}
 	
 	button{
-		margin:5px 0 0 5px;
 	}
 	
 	
@@ -205,11 +204,11 @@
         <div class="bar">
         	<div class="titleFont">地名
             </div>
-            <div id="showPosName" class="infoFont" style="height:50px;width:100%">
+            <div id="showPosName" class="infoFont" style="height:30px;width:100%">
             </div>
             <div class="titleFont">信息
             </div>
-            <div id="showPosDis" class="infoFont" style="height:100px;width:100%">
+            <div id="showPosDis" class="infoFont" style="height:80px;width:100%">
             </div>        
         </div>
 		<!--功能部分-->
@@ -225,23 +224,23 @@
 		<!--修改部分-->
         <div class="bar">
     		<div style="clear:both"></div>
-        	<button class="titleFont" value="增加点" onclick="window.location.href='addVertex.html'">增加点
+        	<button  value="增加点" onclick="window.location.href='addVertex.html'">增加点
             </button>
-            <button class="titleFont" id="deleteBut" disabled="disabled" value="删除点" onclick="deletePos()">删除点
+            <button  id="deleteBut" disabled="disabled" value="删除点" onclick="deletePos()">删除点
             </button>
-			<button class="titleFont" id="updateBut" disabled="disabled" value="修改点" onclick="updatePos()">修改点
+			<button  id="updateBut" disabled="disabled" value="修改点" onclick="updatePos()">修改地名和描述
             </button>
         </div>
 		<div class="bar">		
 			<input id="fromv" value="" onchange="checkFTinput()"/>
 			<input id="tov" value="" onchange="checkFTinput()"/>
-			<button class="titleFont" id="changeBut" disabled="disabled" value="修改点相邻的边" onclick="changePos()">修改点相邻的边
+			<button  id="changeBut" disabled="disabled" value="修改点相邻的边" onclick="changePos()">修改点相邻的边
 			</button>
 		</div>
     </div>
     <div style="clear:both"></div>
     
-	<div style="padding:20px 0 0 0;height:100px;width:100%;background-color:RGB(236,236,236)">
+	<div style="padding:20px 0 0 0;height:150px;width:100%;background-color:RGB(236,236,236)">
 		<div style="margin:0 0 0 45%;" class="flexCenter">
 			<img src="image/oct.png" width="80px" style="float:left"/>
 			<a href="https://github.com/tianyishinidie/schoolguide" class="infoFont" style="float:left">view on Github</a>
