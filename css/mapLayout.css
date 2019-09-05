@@ -47,11 +47,14 @@
 		align-items:center;		
 	}
 	button{
-		min-width:100px;height:50px;font-size:24px;
+		min-width:80px;height:40px;font-size:18px;
+		border-radius:5px;
+		margin:5px 5px 0 0;
 		clear:both;
+		font-family:微软雅黑, 黑体, Consolas;
 	}
 	.titleFont{
-		font-size:24px;
+		font-size:20px;
 		font-family:微软雅黑, 黑体, Consolas;
 	}
 	.infoFont{
