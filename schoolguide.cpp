@@ -12,6 +12,7 @@
 #define DATABASE "schoolguide"
 /*
 g++ schoolguide.cpp -o schoolguide -I /usr/include/mysql -L /usr/lib/mysql -l mysqlclient -lz -lm
+g++ upload.cpp.cpp -o upload -I /usr/include/mysql -L /usr/lib/mysql -l mysqlclient -lz -lm
 */
 using namespace std;
 const int maxv=1e6+10,maxe=1e6+10;
